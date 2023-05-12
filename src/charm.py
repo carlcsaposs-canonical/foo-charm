@@ -27,7 +27,7 @@ class FooCharm(ops.CharmBase):
         self.framework.observe(self.on["provides"].relation_joined, self._on_relation_joined)
         self.framework.observe(self.on["provides"].relation_departed, self._on_relation_departed)
         self.framework.observe(self.on["requires"].relation_joined, self._on_relation_joined)
-        self.framework.observe(self.on["requires"].relation_departed, self._on_relation_departed)
+        self.framework.observe(self.on["requires"].relation_departed, self._on_relation_departed2)
 
     def _on_relation_joined(self, event: ops.RelationJoinedEvent):
         event.relation.data[self.unit]["bar"] = "foobar"
@@ -35,6 +35,9 @@ class FooCharm(ops.CharmBase):
 
     def _on_relation_departed(self, event: ops.RelationDepartedEvent):
         logger.error(f"{event.departing_unit=}, {event.relation.data=}")
+
+    def _on_relation_departed2(self, _):
+        raise Exception
 
 if __name__ == "__main__":  # pragma: nocover
     ops.main(FooCharm)
