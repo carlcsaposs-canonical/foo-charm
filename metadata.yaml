@@ -1,3 +1,9 @@
 name: foo
-# (Required)
 summary: A very short one-line summary of the charm.
+description: foo
+provides:
+  provides:
+    interface: foo
+requires:
+  requires:
+    interface: foo
